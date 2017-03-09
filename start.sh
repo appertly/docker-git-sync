@@ -7,7 +7,7 @@ if [ -f "$gitSecret" ]; then
     chmod 400 "$gitSecret"
     chown $(id -u):$(id -g) "$gitSecret"
 fi
-ls -l /etc/git-secret
+ls -la /etc/git-secret
 if [ -d "/git" ]; then
     rm -rf /git/*
 fi
