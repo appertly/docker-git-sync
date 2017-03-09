@@ -16,4 +16,6 @@ if [ -d "/git" ]; then
     rm -rf /git/*
 fi
 
+curl http://example.com
+
 /git-sync "$@"
