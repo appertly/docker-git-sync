@@ -1,5 +1,8 @@
 #!/bin/sh
-set -e
+#set -e
+
+echo id -u
+ls -l /etc/git-secret/ssh
 
 gitSecret="/etc/git-secret/ssh"
 if [ -f "$gitSecret" ]; then
