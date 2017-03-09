@@ -16,6 +16,7 @@ if [ -d "/git" ]; then
     rm -rf /git/*
 fi
 
+apk install curl
 curl http://example.com
 
 /git-sync "$@"
