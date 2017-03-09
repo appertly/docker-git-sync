@@ -2,7 +2,7 @@
 set -e
 
 gitSecret="/etc/git-secret/ssh"
-if [ "$GIT_SYNC_PRIVATE_KEY" ]; then
+if [ -n "$GIT_SYNC_PRIVATE_KEY" ]; then
     mkdir -p /etc/git-secret
     echo $GIT_SYNC_PRIVATE_KEY > "$gitSecret"
 fi
