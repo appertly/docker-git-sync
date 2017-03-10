@@ -16,8 +16,9 @@ if [ -d "/git" ]; then
     rm -rf /git/*
 fi
 
-apk update --no-cache
-apk add curl
-curl http://example.com
+cat /etc/resolv.conf
+#apk update --no-cache
+#apk add curl
+#curl http://example.com
 
 /git-sync "$@"
