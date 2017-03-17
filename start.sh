@@ -61,3 +61,8 @@ fi
 if [ -n "$gchgrp" ]; then
     chgrp -R $gchgrp $groot
 fi
+
+while true
+do
+	sleep 30
+done
