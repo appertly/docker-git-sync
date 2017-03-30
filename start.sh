@@ -25,15 +25,13 @@ gchown="$GIT_SYNC_CHOWN"
 gchgrp="$GIT_SYNC_CHGRP"
 gusername="$GIT_SYNC_USERNAME"
 gpassword="$GIT_SYNC_PASSWORD"
+gwait="${GIT_SYNC_WAIT:-30}"
+gonce="${GIT_SYNC_ONE_TIME}"
 
 if [ -d "$groot" ]; then
     find "$groot" -mindepth 1 -delete
 fi
 
-# var flWait = flag.Float64("wait", envFloat("GIT_SYNC_WAIT", 0),
-# 	"the number of seconds between syncs")
-# var flOneTime = flag.Bool("one-time", envBool("GIT_SYNC_ONE_TIME", false),
-# 	"exit after the initial checkout")
 # var flMaxSyncFailures = flag.Int("max-sync-failures", envInt("GIT_SYNC_MAX_SYNC_FAILURES", 0),
 # 	"the number of consecutive failures allowed before aborting (the first pull must succeed)")
 
@@ -52,17 +50,32 @@ fi
 gitcmd="$gitcmd $groot"
 
 eval "$gitcmd"
-if [ "$gmod" != "0" ]; then
-    chmod -R $gmod $groot
-fi
-if [ -n "$gchown" ]; then
-    chown -R $gchown $groot
-fi
-if [ -n "$gchgrp" ]; then
-    chgrp -R $gchgrp $groot
-fi
 
-while true
-do
-	sleep 30
-done
+doChanges()
+{
+    if [ "$gmod" != "0" ]; then
+        chmod -R $gmod $groot
+    fi
+    if [ -n "$gchown" ]; then
+        chown -R $gchown $groot
+    fi
+    if [ -n "$gchgrp" ]; then
+        chgrp -R $gchgrp $groot
+    fi
+}
+doChanges
+
+if [ -z "$gonce" ]; then
+    cd $groot
+    while true
+    do
+	    sleep $gwait
+        git pull
+        doChanges
+    done
+else
+    while true
+    do
+        sleep 30
+    done
+fi
