@@ -20,6 +20,7 @@ Plus we add a couple more.
 
 * `GIT_SYNC_CHOWN` – Any cloned files will be `chown`ed to this
 * `GIT_SYNC_CHGRP` – Any cloned files will be `chgrp`ed to this
+* `GIT_SYNC_POST_PULL` – This is a command that will be run after any `git clone` or `git pull`.
 
 ## SSH Keys
 

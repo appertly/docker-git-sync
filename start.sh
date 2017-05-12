@@ -27,6 +27,7 @@ gusername="$GIT_SYNC_USERNAME"
 gpassword="$GIT_SYNC_PASSWORD"
 gwait="${GIT_SYNC_WAIT:-30}"
 gonce="${GIT_SYNC_ONE_TIME}"
+gafter="${GIT_SYNC_POST_PULL}"
 
 if [ -d "$groot" ]; then
     find "$groot" -mindepth 1 -delete
@@ -61,6 +62,9 @@ doChanges()
     fi
     if [ -n "$gchgrp" ]; then
         chgrp -R $gchgrp $groot
+    fi
+    if [ -n "$gafter"]; then
+        eval "$gafter"
     fi
 }
 doChanges
