@@ -67,10 +67,10 @@ doChanges()
         eval "$gafter"
     fi
 }
+cd $groot
 doChanges
 
 if [ -z "$gonce" ]; then
-    cd $groot
     while true
     do
 	    sleep $gwait
