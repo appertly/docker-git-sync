@@ -63,7 +63,7 @@ doChanges()
     if [ -n "$gchgrp" ]; then
         chgrp -R $gchgrp $groot
     fi
-    if [ -n "$gafter"]; then
+    if [ -n "$gafter" ]; then
         eval "$gafter"
     fi
 }
