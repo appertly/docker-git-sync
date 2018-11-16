@@ -6,10 +6,6 @@ mkdir -p /root/.ssh
 if [ -n "$GIT_SYNC_PRIVATE_KEY" ]; then
     echo "$GIT_SYNC_PRIVATE_KEY" > "$gitSecret"
 fi
-if [ -f "$gitSecret" ]; then
-    chmod 400 "$gitSecret"
-    chown $(id -u):$(id -g) "$gitSecret"
-fi
 
 if [ -z "$GIT_SYNC_REPO" ]; then
     echo "No git repository specified in GIT_SYNC_REPO"
@@ -37,7 +33,7 @@ fi
 # 	"the number of consecutive failures allowed before aborting (the first pull must succeed)")
 
 if [ -n "$gssh" ]; then
-    echo -e "Host *\n\tStrictHostKeyChecking no\n\tUserKnownHostsFile /dev/null\n" >> ~/.ssh/config
+    GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 fi
 if [ -n "$gusername" ] && [ -n "$gpassword" ]; then
     git config --global credential.helper cache
