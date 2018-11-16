@@ -1,6 +1,5 @@
-FROM debian:jessie
+FROM debian:latest
 
-ADD start.sh /start.sh
 RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates git openssh-client \
     && rm -rf /tmp/* /var/tmp/* \
@@ -8,8 +7,11 @@ RUN apt-get update \
     && rm -rf /var/log/apt/* \
     && rm -rf /var/log/dpkg.log \
     && rm -rf /var/log/bootstrap.log \
-    && rm -rf /var/log/alternatives.log \
-    && chmod +x /start.sh
+    && rm -rf /var/log/alternatives.log
+
+COPY start.sh /start.sh
+
+RUN chmod 755 /start.sh
 
 VOLUME ["/git"]
 
