@@ -1,7 +1,8 @@
 FROM debian:latest
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates git openssh-client \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends ca-certificates git openssh-client \
+    && DEBIAN_FRONTEND=noninteractive apt-get clean \
     && rm -rf /tmp/* /var/tmp/* \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/log/apt/* \
